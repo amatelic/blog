@@ -7,14 +7,17 @@
   'use strict';
 
   var $document = $(document);
+  var $window = $(window);
+  var $cover =  $('header');
 
   $document.ready(function() {
-
     var $postContent = $('.post-content');
     $postContent.fitVids();
 
-    checkVerticalPosition();
     $('.scroll-down').arctic_scroll();
+
+
+    checkForCoverWidth();
 
     $('.menu-button, .nav-cover, .nav-close').on('click', function(e){
       e.preventDefault();
@@ -56,28 +59,40 @@
   };
 
   //My code
-
-  function chooseColor() {
-    var colors = ['A3B88A', 'FF702D', 'FCCA46', '7CB4B8'];
-    var number = Math.round(Math.random() * (colors.length - 1));
-    return '#' + colors[number];
-
-  }
-
   function fireAnimation() {
     var main = $('.main');
     main.find('article').each(function(index, data) {
       var el = $(data);
-      el.css('background', chooseColor());
       setTimeout(function() {
         el.addClass('show-box');
       }, index * 500);
     });
   }
-  function checkVerticalPosition(){
-    var main = $('.vertical');
-    $('body').on('scrool', function(){
-      console.log('To dela haha');
+
+  function checkForCoverWidth() {
+    if (checkForAniamtion($window.height(), $cover.height())) {
+      fireAnimation();
+    } else {
+      isScrolling();
+    }
+  }
+
+  function isScrolling() {
+    $document.on('scroll', function(e) {
+      if (checkForAniamtion($document.scrollTop(),($cover.height() / 2))) {
+        fireAnimation();
+        $document.off();
+      }
+
     });
   }
+
+  function checkForAniamtion(target, obj) {
+    if (target > obj) {
+      return true;
+    }
+
+    return false;
+  }
+
 })(jQuery);

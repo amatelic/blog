@@ -2151,3 +2151,7 @@ body:not(.post-template) .post-title {
     height: 100%;
     background-size: cover;
 }
+.tag-js{ background: #A3B88A; }
+.tag-android{ background: #FF702D; }
+.tag-ios{ background: #FCCA46;}
+.tag-microController{ background: #7CB4B8;}

@@ -6,7 +6,7 @@
 {{! This is the post loop - each post will be output using this markup }}
 <div class="main">
   {{#foreach posts}}
-  <article class="box">
+  <article onclick="window.location.href='{{url}}';"class="box {{post_class}}">
       <header class="post-header">
           <h2 class="post-title"><a href="{{url}}">{{{title}}}</a></h2>
       </header>
